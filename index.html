@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: url(https://img.freepik.com/free-photo/various-vegetables-black-table-with-space-message_1220-616.jpg?size=626&ext=jpg&ga=GA1.1.2082370165.1729296000&semt=ais_hybrid);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            margin: auto;
+            padding-top: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .logo {
+            color: #e78f38;
+            font-size: 30px;
+            font-weight: bolder;
+            transition: .3s;
+        }
+
+        .logo:hover {
+            transform: translateX(20px);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            font-size: 15px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: #e78f38;
+            border-bottom: 2px solid #e78f38;
+        }
+
+        nav button {
+            background: #e78f38;
+            border: none;
+            color: #fff;
+            padding: 12px 35px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 2rem;
+            transition: .3s;
+        }
+
+        nav button:hover {
+            scale: .8;
+        }
+
+
+         .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 2rem;
+            outline: none;
+            font-size: 14px;
+            width: 150px;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar input[type="text"]:focus {
+            width: 200px;
+        }
+
+        .search-bar button {
+            background: #e78f38;
+            border: none;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-bar button:hover {
+            transform: scale(0.9);
+        }
+
+
+        .content {
+            position: absolute;
+            top: 35%;
+            left: 90px;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 50px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        p {
+            font-size: 11px;
+            margin-top: 10px;
+            color: #eee;
+        }
+
+        .content button {
+            margin-top: 50px;
+            background: #e78f38;
+            border: 2px solid #e78f38;
+            color: #fff;
+            padding: 12px 45px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 2rem;
+            transition: .3s;
+        }
+
+        .content button:hover {
+            scale: .8;
+        }
+
+        .content button.know_more {
+            background: transparent;
+            border: 2px solid #e78f38;
+            color: #e78f38;
+            margin-left: 30px;
+        }
+
+        .content button.know_more:hover {
+            background: #e78f38;
+            color: #eee;
+        }
+
+        .about-us, .contact-us {
+            background-color: #f4f4f4;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .about-us h2, .contact-us h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .about-us p, .contact-us p {
+            color: #555;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .contact-us form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .contact-us form input, .contact-us form textarea {
+            padding: 10px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-us form button {
+            padding: 10px 30px;
+            background-color: #e78f38;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-us form button:hover {
+            background-color: #d36f26;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        #menu {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+   
+
+
+        .menu-category {
+            margin-bottom: 30px;
+        }
+
+        .menu-category h3 {
+            background: #FF6600; /* Foodie Orange */
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-category h3:hover {
+            background-color: #e75e00;
+        }
+
+        .menu-items {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .menu-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-items li:hover {
+            background-color: #f5f5f5;
+        }
+
+        .menu-items span {
+            color: #FF6600; /* Foodie Orange */
+            font-weight: 600;
+        }
+
+        .menu-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #FF6600; /* Foodie Orange */
+            color: #fff;
+            margin-top: 40px;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .menu-category h3 {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+
+            .menu-items li {
+                font-size: 0.95rem;
+                padding: 8px 12px;
+            }
+        }
+
+    #reviews h2 {
+            text-align:center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+    .reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    }
+    .review-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+    }
+
+    .review-card:hover {
+    transform: translateY(-5px);
+    }
+    .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    }
+
+    .customer-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    }
+
+    .customer-info {
+    flex-grow: 1;
+    }
+
+    .customer-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+
+    .review-date {
+    font-size: 0.9rem;
+    color: #777;
+    }
+   .review-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 15px;
+    }
+
+    .rating {
+    font-size: 1.2rem;
+    color: #FFD700; 
+    }
+
+
+    @media (max-width: 768px) {
+    .reviews-container {
+        grid-template-columns: 1fr;
+    }
+
+    .review-card {
+        margin: 0 auto;
+    }
+    }
+
+    
+    
+    #blog h2 {
+        text-align:center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 28px;
+    }
+    .blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.blog-card {
+    background-color:#fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.blog-date {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.blog-excerpt {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.read-more {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff6347;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #e5533b;
+}
+
+@media (max-width: 768px) {
+    .blog-container {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-card {
+        margin: 0 auto;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="hero">
+        <nav>
+            <a href="#" class="logo">FOODIE</a>
+
+            <ul>
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#about" onclick="showSection('about')">About</a></li>
+                <li><a href="#menu" onclick="showSection('menu')">Menu</a></li>
+                <li><a href="#reviews" onclick="showSection('reviews')">Reviews</a></li>
+                <li><a href="#blog" onclick="showSection('blog')">Blog</a></li>
+            </ul>
+    
+
+
+            <form class="search-bar" action="order.html" method="get">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+
+            
+            <button><a href="login.html">Login</a></button>
+        </nav>
+
+        <div class="content">
+            <h2 style="color: #fff;">A Taste Sensation <br> Like No Other</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id blanditiis rem debitis quis consequuntur quia  <br>magni  odio saepe exercitationem adipisci beatae, fugit totam omnis.</p>
+
+            <a href="order.html"><button>Order Now</button></a>  
+        </div>
+    </div>
+    
+   
+
+    <!-- About Section -->
+    <div class="about-us" id="about">
+        <h2>About Us</h2>
+        <p>
+            Welcome to FOODIE, a place where taste meets excellence. Our mission is to serve delicious meals made with the freshest ingredients.
+            We offer a variety of dishes, from starters to drinks, all crafted to deliver an unforgettable experience.
+            This project is brought to you by <strong>FOODIE Inc.</strong>, a company dedicated to culinary innovation and customer satisfaction.
+            Designed and developed by [Your Name], this project reflects our commitment to bringing joy and flavor to your dining experience.
+        </p>
+    </div>
+
+    <div class="contact-us" id="contact">
+        <h2>Contact Us</h2>
+        <p>
+            We'd love to hear from you! Whether you have a question about our menu, want to give feedback, or just want to say hi, feel free to get in touch.
+        </p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+  <br>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2>Our Menu</h2>
+
+        <!-- Main Course Section -->
+        <div class="menu-category">
+            <h3 onclick="toggleMenu('main-course')">Main Course</h3>
+            <ul id="main-course" class="menu-items">
+                <li>Fried Rice <span>$15</span></li>
+                <li>Garlic Naan <span>$12</span></li>
+                <li>Spicy Butter Chicken <span>$15</span></li>
+                <li>Biryani <span>$15</span></li>
+                <li>Panner Burji <span>$13</span></li>
+                <li>Bibimbap <span>$15</span></li>
+            </ul>
+        </div>
+
+        <!-- Appetizers Section -->
+        <div class="menu-category">
+            <h3 onclick="toggleMenu('appetizers')">Appetizers</h3>
+            <ul id="appetizers" class="menu-items">
+                <li>Avocado Toast <span>$12</span></li>
+                <li>Spaghetti Pasta <span>$13</span></li>
+                <li>Pizza <span>$15</span></li>
+                <li>Hamburger <span>$15</span></li>
+                <li>Dumplings <span>$15</span></li>
+            </ul>
+        </div>
+
+        <!-- Drinks Section -->
+        <div class="menu-category">
+            <h3 onclick="toggleMenu('drinks')">Drinks</h3>
+            <ul id="drinks" class="menu-items">
+                <li>Lemonade <span>$7</span></li>
+                <li>Smoothie <span>$9</span></li>
+                <li>Milkshake <span>$15</span></li>
+                <li>Mocktail <span>$15</span></li>
+                <li>Cold drinks <span>$15</span></li>
+            </ul>
+        </div>
+
+        <div class="menu-footer">
+            <p>Order now and taste the ultimate flavors! Enjoy your meal with Foodie.</p>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu(id) {
+            const section = document.getElementById(id);
+            section.style.display = (section.style.display === "block") ? "none" : "block";
+        }
+    </script>
+
+    <br>
+    
+    <!-- Reviews Section -->
+    <section id="reviews">
+    <h2>Latest Reviews</h2>
+    <div class="reviews-container">
+            
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://qph.cf2.quoracdn.net/main-qimg-6a2e0885f68ce6e27f3fdc774ce1c003-lq" alt="Customer 1" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Namjoon</h3>
+                    <p class="review-date">October 20, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">The food here is absolutely amazing! The ingredients are fresh, and the flavors are incredible. Highly recommended for anyone looking for authentic dishes.</p>
+            <div class="rating">★★★★☆</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMdih2QEOQuPd8JKNfKTtTYescuUBuYLakZA&s" alt="Customer 2" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Seokjin</h3>
+                    <p class="review-date">October 15, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">I loved the atmosphere and the variety of dishes on the menu. Everything I tried was delicious, and the service was friendly. A must-visit!</p>
+            <div class="rating">★★★★★</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://kpopjuice.com/img?url=https://ibighit.com/bts/images/profile/proof/member/member-suga.jpg" alt="Customer 2" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Yoongi</h3>
+                    <p class="review-date">October 15, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">I loved the atmosphere and the variety of dishes on the menu. Everything I tried was delicious, and the service was friendly. A must-visit!</p>
+            <div class="rating">★★★★★</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://i.pinimg.com/736x/d4/b1/a4/d4b1a4637c591df71e9a0d633de0c883.jpg" alt="Customer 2" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Jhope</h3>
+                    <p class="review-date">October 15, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">I loved the atmosphere and the variety of dishes on the menu. Everything I tried was delicious, and the service was friendly. A must-visit!</p>
+            <div class="rating">★★★★★</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMd5KGLtcn1SBs9-B_0icdVCB0S5HXELc35w&s" alt="Customer 2" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Jimin</h3>
+                    <p class="review-date">October 15, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">I loved the atmosphere and the variety of dishes on the menu. Everything I tried was delicious, and the service was friendly. A must-visit!</p>
+            <div class="rating">★★★★★</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5BTSM2e33OFP_kS6EDUM1GfctEN0vOF_BLw&s" alt="Customer 2" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Taehyung</h3>
+                    <p class="review-date">October 15, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">I loved the atmosphere and the variety of dishes on the menu. Everything I tried was delicious, and the service was friendly. A must-visit!</p>
+            <div class="rating">★★★★★</div>
+        </div>
+
+        <div class="review-card">
+            <div class="review-header">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRhbvtUGd1HeYtq34jgakSUm8ifQQLDU9k4A&s" alt="Customer 3" class="customer-img">
+                <div class="customer-info">
+                    <h3 class="customer-name">Jungkook</h3>
+                    <p class="review-date">October 10, 2024</p>
+                </div>
+            </div>
+            <p class="review-text">Great place for a family dinner! The portions are generous, and the food is well worth the price. We'll definitely be coming back again.</p>
+            <div class="rating">★★★★☆</div>
+        </div>
+    </div>
+    <br>
+
+
+    <!-- Blog Section -->
+    <section id="blog">
+    <h2 class="section-title">Latest from the Blog</h2>
+    <div class="blog-container">
+            
+        <div class="blog-card">
+            <img src="https://media.vyaparify.com/vcards/blogs/66036/Italian-Pasta-Creations.jpg" alt="Delicious Pasta" class="blog-img">
+            <div class="blog-content">
+                <h3 class="blog-title">The Secret to Perfect Homemade Pasta</h3>
+                <p class="blog-date">October 22, 2024</p>
+                <p class="blog-excerpt">Discover how to make the most delicious homemade pasta with this simple recipe and tips straight from an Italian kitchen.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <img src="https://www.theseasonedmom.com/wp-content/uploads/2022/05/grilled-burger-recipe-5.jpg" alt="Gourmet Burger" class="blog-img">
+            <div class="blog-content">
+                <h3 class="blog-title">5 Tips for Grilling the Perfect Burger</h3>
+                <p class="blog-date">October 18, 2024</p>
+                <p class="blog-excerpt">Learn how to grill the juiciest and most flavorful burgers using these five expert grilling techniques.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <img src="https://img.freepik.com/premium-photo/guiltfree-sweetness-vegan-dessert-heaven_974629-362.jpg" alt="Dessert Heaven" class="blog-img">
+            <div class="blog-content">
+                <h3 class="blog-title">Decadent Desserts You Can Make at Home</h3>
+                <p class="blog-date">October 12, 2024</p>
+                <p class="blog-excerpt">Satisfy your sweet tooth with these easy-to-make yet incredibly indulgent dessert recipes that will impress any guest.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>📞 +123-456-7890 | 🌐 www.foodie.com</p>
+        <p>&copy; 2024 FOODIE Inc. All Rights Reserved. Designed by [Your Name]</p>
+    </footer>
+
+</body>
+</html>
